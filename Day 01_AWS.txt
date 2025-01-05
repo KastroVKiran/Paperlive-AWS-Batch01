@@ -1,0 +1,98 @@
+													Day 01_AWS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. Introduction to AWS/Cloud Computing
+2. AWS Services - S3
+3. AWS Services - EC2
+4. AWS Services - IAM
+5. AWS Services - RDS
+6. AWS Services - VPC
+7. AWS Services - Cloud Front
+8. Cloud Watch
+9. SNS
+10. Route 53
+11. Minor Services (~ 10)
+
+Project - AWS 3 Tier Architecture
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Before the begin of Cloud Computing
+----------------------------------------------
+P1 - XYZ - Hyderabad - Netflix - Files/Code
+P2 - XYZ - Bangalore - Netflix
+
+Ways of sharing the files/code:
+1. Pen Drives/Hard disks -----> P1 & P2 are working in same location ----> Copy the files and share the pendrive to P2 ----> Data Security, Data Loss ----> P2 (XYZ), P3 (ABC)
+
+2. Google Drive/Email/WhatsApp ----> Large size files cannot be shared using whatsapp/email. Google Drive ----> Upload the data ----> Drive link (Public, Private-Email) 50% of Data Loss, 50% of Data Security
+Max 15GB
+
+To overcome the Data Loss and Data Security issues, we have got the Cloud Computing technology
+
+What is Cloud Computing?
+-----------------------------------
+Cloud Computing ----> Sharing the data via internet
+
+Cloud Service Providers ----> GCP, Azure, AWS, VM Ware....
+
+Cloud Models
+----------------------------------
+1. Service Model
+	1.1. IaaS - Infrastructure as a Service
+	1.2. Paas - Platform as a Service
+	1.3. SaaS - Software as a Service
+
+2. Deployment Model
+	2.1. Public Cloud
+	2.2. Private Cloud
+	2.3. Hybrid Cloud
+
+AWS Cloud Certifications
+----------------------------------- 
+https://aws.amazon.com/certification/certified-cloud-practitioner/?gclid=CjwKCAiA1eO7BhATEiwAm0Ee-LASIWTUoVYIALhYeDeObyjvpnWai_jycHiv63rCYsmrg8zewneT5BoCYNcQAvD_BwE&trk=662aeb66-1ee5-4842-b706-60c6a1b4f187&sc_channel=ps&ef_id=CjwKCAiA1eO7BhATEiwAm0Ee-LASIWTUoVYIALhYeDeObyjvpnWai_jycHiv63rCYsmrg8zewneT5BoCYNcQAvD_BwE:G:s&s_kwcid=AL!4422!3!508672715014!e!!g!!aws%20cloud%20certifications!11138243483!106933367222
+
+Roles in Cloud Computing
+---------------------------------------
+Cloud Engineer, Cloud Software Engineer. Security Engineer, FinOps Analyst, Cloud Administrator, Systems Administrator 
+
+AWS Global Infrastructure
+-------------------------------------
+AWS Global Infrastructure is divided into Regions and AZs
+
+Region is a geographical location
+Every region is AWS has a region code
+AZ is a part of a region
+Every region have atleast 2 AZs
+Every AZ will have AZ code
+Each AZ will be at a distance atleast 100 km
+
+Note: We dont have a region called China
+
+Largest Region is N.Virginia which consists of 6 AZs (2006)
+In India, we have 2 regions; Mumbai (3 AZs), Hyderabad (3 AZs)
+Smallest region is Osaca (1 AZ)
+
+AWS Account Creation
+--------------------------------
+1. Valid email id and Credit/Debit card (Visa and Master)
+2. 2 Rs will get deducted. Credited
+3. AWS Account - Free Account - 12 Months/1 Year
+
+Note: When we say it as a free account, it doesn't mean whatever resources that we are going to create are completely free. 
+
+Video Link:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
