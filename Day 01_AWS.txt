@@ -79,7 +79,7 @@ AWS Account Creation
 
 Note: When we say it as a free account, it doesn't mean whatever resources that we are going to create are completely free. 
 
-Video Link:
+Video Link: https://youtu.be/E3M2GA0A7nI
 
 
 
