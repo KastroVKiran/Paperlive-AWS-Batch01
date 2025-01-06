@@ -1,0 +1,107 @@
+													Day 02_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. Introduction to S3
+2. Important points to remember in S3
+3. Creation of bucket, upload/download objects
+4. ACLs
+5. Making an object public
+6. Static website hosting
+7. Storage classes - Concept
+8. Storage classes - Demo
+9. Additional resources on storage classes
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+S3 - Simple Storage Service
+
+S3 is one of the storage services available in AWS Cloud
+By using S3, we will store the data
+S3 is the second service released under AWS - 2006, March 14
+SQS (Simple Queue Service) is the first service - 2004
+
+Mobile - Memory (100GB) -----> Completely utilized (Photos/Videos/Documents)
+	1. Delete pics/videos, uninstall apps
+	2. Back up of data using external devices
+	3. If external devices are not available, we will upload the data to the Cloud (Google Drive), which is similar to S3 service
+
+In S3, there is no storage limit. But, charges are applicable - Scalability
+10 GB ----> 100 GB
+
+In memory cards/pen drives/hard disks only single copy files are available and there is a chance of loss of data incase pendrives are lost/virus attack/loss of devices. But in AWS S3 service, every file that you will upload into the S3, it will store automatically 3* copies of the same file.
+The copies of the files depends on the region where you are creating the S3 bucket.
+Mumbai -----> 3 AZs ---->  3 copies
+N.Virginia ----> 6 AZs -----> 6 copies ----> Availability
+
+Internet access is mandatory
+
+S3 Concepts
+----------------------
+S3 Bucket Types;
+General Purpose Buckets
+ General purpose buckets allow objects that are stored across all storage classes, except S3 Express One Zone.
+Most commonly used type.
+
+Directory Buckets
+ Uses the S3 Express One Zone storage class.
+ This bucket type is recommended if an application is performance sensitive and benefits from single-digit millisecond latencies.
+
+As a Free-tier (12 months) account, you can store upto 5 GB data
+Max size of S3 bucket is 5TB
+Max buckets you can create per account is 500 (earlier it was 100 buckets)
+
+Note: S3 is a global specific service but the buckets that you are creating are region specific
+
+Every object that is uploaded into the S3 bucket will get an object URL
+
+If you want to give the public access to an object;
+	Disable ACLs	
+	Block all public access - uncheck
+	Make public using ACL
+
+Static Website Hosting in S3 Bucket
+-------------------------------------------------
+1. Static website		----> newspaper website (thehindu.com)
+2. Dynamic website		----> youtube 
+
+https://static-website-hosting-06jan.s3.ap-south-1.amazonaws.com/index.html
+
+http://static-website-hosting-06jan.s3-website.ap-south-1.amazonaws.com
+
+Storage Classes in S3
+--------------------------------
+Object ----> Storage class
+By default when we upload an object into the S3 bucket, the default storage class is 'standard' (3 copies)
+
+1. Standard --- >= 3 copies, original file format (.pdf) 10 rs/file
+2. RRS (Reduced Redundant Storage) ----> 100 files - Every year 1.5% of the file will be deleted automatically
+3. Intelligent ---> aws will define whether the object is FA or IA - >= copies
+4. Standard IA ---> >= 3 copies
+5. One zone IA ---> 
+6. Glacier ----> 100 files (.pdf) ---> zip (audit) ---> 5mins-12hrs ---> 90 days charges
+7. Glacier Deep Archival ---> 12 hrs to download ---> 180 days charges
+
+
+Tasks to be completed/Additional Resources
+S3 Storage Classes Video Link: https://youtu.be/TvkyDfJrh6A
+S3 Storage Classes Demo Video Link: https://youtu.be/wFGic3-6WVA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
