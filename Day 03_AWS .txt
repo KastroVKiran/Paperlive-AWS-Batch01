@@ -1,0 +1,72 @@
+													Day 03_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. S3 Versioning - Theory & Demo
+2. How to recover the deleted objects
+3. Life cycle management - Theory & Demo
+4. S3 Replication Setup
+5. S3 Access Points - Theory
+
+1. S3 Versioning - Theory & Demo
+Before enabling the versioning
+Kastro.txt ----> AWS --------> Permanently deleted
+Kastro.txt ----> DevOps
+
+Enabled the versioning
+Kastro.txt ----> S3
+Kastro.txt ----> Simple Storage Service
+
+Suspended the versioning
+Kastro.txt ----> Bucket
+Kastro.txt ----> Object
+
+2. How to recover the deleted objects
+Note: Whenever we delete a file which consists of 'delete marker' tag, such file will get recovered
+
+3. Life cycle management
+
+App ----> 1000s of files ----> 3 months (fully available) ----> 3 months (maybe or may not be) ----> 6 months (not used frequently, but whenever customer needs them, they should be available) ----> 12 months (automatically deleted)
+
+Standard storage class is not recommended to save the files through out the 12 months of period. Charges is an issue.
+
+1 -----> 100 MB ----> 10 Rs/file/month
+1st 3 months ----> 3 x 10 = 30 Rs
+2nd 3 months ----> 3 x 10 = 30 Rs
+3rd 6 months ----> 6 x 10 = 60 Rs
+4th 12 months ----> 12 x 10 = 120 Rs
+---------------------------------------------------
+Total charge = 240 Rs/file/2years
+
+3 months ----> Standard (10 Rs/file)
+3 months ----> 10 Rs/file		6 Rs/file
+6 months ----> 6 Rs/file
+12 months ----> 2 Rs/file
+
+3 x 10 = 30 Rs
+3 x 8 = 24 Rs
+6 x 6 = 36 Rs
+12 x 2 = 24 Rs
+---------------------------------------------------
+Total charge = 114 Rs/file/2years
+
+
+2 types of configurations
+1. Transition policy --- if you want to change the file from one storage class to another storage class
+2. Expiration policy --- if you want to delete the file after 2 years*
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
