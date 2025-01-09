@@ -1,0 +1,47 @@
+													Day 04_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. S3 Security - Theory & Demo
+2. S3 Transfer Acceleration
+3. AWS Organizations and Billing - Theory & Demo
+4. AWS Datasync
+5. EFS - Theory & Demo
+6. Amazon FSx for Windows
+
+AWS Organizations is a service in AWS which is used to create multiple AWS accounts using root account for FREE of cost.
+A maximum of 10 accounts can be created
+
+Amazon supports 3 types of storage systems;
+1. File storage		- EFS (Elastic File System)
+2. Object storage	- S3 (Simple Storage Service)
+3. Block storage	- EBS (Elastic Block Storage - EC2)
+
+EFS provides a simple, serverless elastic file system that lets the user to share the files without provisioning or managing storage systems
+EFS is used only for Linux OS
+FSx is used for Windows OS.
+FSx is also a storage system.
+EFS is usedful for ML domain, Database backup, Test Env
+
+AWS Data Sync
+-------------------------
+To migrate the large set of data from one bucket to another bucket using Datasync
+
+AWS Datasync ----> Tasks (left pane) ----> Create task ----> Create a new location, Configuration: Location type: AWS S3, Region: (Select the region and bucket name in which large dataset is there), Bucket: Select the large dataset bucket, IAM Role: Autogenerate ----> Next ----> Configure destination location: Create a new location ----> Location type: S3, Select the region and bucket to where you want to sync, Storage class can also be changed ----> Next ----> Name: data-sync-demo, Look for other options and make the changes accordingly ----> next ----> Create task
+
+Start dropdown ----> Start with defaults ----> You can see the status as 'launching' ----> Goto the target bucket and verify the files ----> Wait for sometime to see the changes
+
+
+Additional topics for S3:
+https://www.youtube.com/playlist?list=PLs-PsDpuAuTdOcZa-DDgG8KRbtMI_XRrC
+
+
+
+
+
+
+
+
+
+
+
+
