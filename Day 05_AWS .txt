@@ -1,0 +1,33 @@
+													Day 05_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. Virtualization
+2. Types of Virtualization
+3. Shared Vs Dedicated Host
+4. EC2 – Introduction
+5. Instance 
+6. Instance States
+7. Billing
+8. Instance – Types
+9. Instance – Families
+10. Instance – Purchasing Options
+11. AWS Pricing Calculator
+12. EC2 Console – Overview
+13. Launching EC2 Instance
+14. Connecting to the EC2 Instance using MobaXTerm nd EC2 instance connect option
+15. Creating a sample web page and accessing the page
+16. Securing the instance against accidental termination*
+
+Port Number 22 - SSH - To connect to any instance, we need to open Port number 22
+By default all the Linux based instances will have the username as "ec2-user"
+By default all the Ubuntu based instances will have the username as "ubuntu"
+
+3.88.186.12 - Running
+54.84.128.113 - After restarting
+
+Note: Whenever we stop and restart the instance, everytime we will get new public ip address
+
+
+
+
+
