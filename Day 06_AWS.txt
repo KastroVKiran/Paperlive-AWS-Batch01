@@ -1,0 +1,139 @@
+													Day 06_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. Securing the instance against accidental stop and termination
+2. Amazon Machine Image (AMI)
+	2.1. Creation of AMI from EC2 Instance
+	2.2. Creation of EC2 Instance using AMI
+3. Storage Formats in AWS
+4. Elastic Block Storage (EBS)
+	4.1. How to attach a new EBS Volume to an existing VM
+	4.2. How to increase EBS volume size of VM
+	4.3. EBS Multi-attach
+	4.4. How to detach an EBS Volume from an existing VM
+5. AMI Vs Snapshots
+6. EC2 Placement Groups
+7. Connecting to VM using Sessions Manager*
+8. How to attach an Elastic IP to VM
+9. Creation of VM using Snapshots
+
+Elastic IP:
+When we stop the instance and restart the same instance, the public IP address of the instance will get changed everytime when we stop and restart the instance.
+I dont want the Public IP address to get changed whenever i stop and restart the instance. For this we will use Elastic IP.
+Elastic IP is billable.
+
+54.145.179.157
+34.203.221.211
+
+52.7.41.194
+
+AMI
+--------------
+AMI is a master image for the creation of virtual servers.
+AMIs are templates that are configured with an OS and other software that determine the user's operating environment. 
+AMI is an backup of the instance.
+
+Types of AMIs
+1. AMI created by the root user
+2. Community AMI - when an AMI is created and shared with other AWS users, it comes under community AMI. These AMI are not verified by AWS
+3. Market place - Its a service offered by AWS where software vendors sell their products using AWS. These AMIs are verified by AWS
+
+Creation of AMI from EC2 Instance
+	VM ----> Git is installed ----> Create AMI from the VM ----> Using the AMI, launch VM ----> Verify for git in the newly launched instance
+
+
+3. Storage Formats in AWS
+-----------------------------------------
+1. File level storage
+	1.1. EFS - for Linux OS
+	1.2. FSx - for Windows OS
+2. Block level storage
+	2.1. EBS - Elastic Block Storage
+3. Object level storage
+	3.1. S3
+
+For every instance we will launch, we need to attach a storage device. That storage device is known as EBS Volume.
+EC2 and EBS are independent. They both are connected by a network.
+When we want a persistent storage we will use EBS.
+	Persistent is nothing but data shouldn't get deleted and stores for longer time
+'Instance store' is also called as temporary storage
+'EBS Volume' is also called as persistent storage
+For one EC2 instance, a total of 16 EBS volumes can be attached
+1 EBS volume can also be connected to multiple instances using a concept called EBS Multi-attach
+EBS is based on AZ.
+If an EBS volume is created in any AZ, AWS will create a copy/clone of the EBS volumes.
+	Original volume ----> Clone1 ---> Clone2 ---> Clone3
+The original volume which is attached to an instance is called as ROOT VOLUME
+EBS Volumes are something which are created additionally.
+
+Types of EBS volumes
+-----------------------------
+1. SSD -----> Better performance
+2. HDD -----> Slow performance
+3. Previous generation
+
+The data which is accessed frequently, then we will use SSD
+SSD is majorly used when we have less data which is accessed frequently.
+The advantage of using SSD is the SSD disk functions based on IOPS
+	IOPS - Input Output Per Second
+HDD is used when we have large data but it is accessed less frequently
+HDD functions base don 'Throughput' MBPS or GBPS
+
+Types of SSD;
+1. General purpose
+2. Provisioned IOPS
+
+When there is a normal usage then we will select general purpose. By default it will come when we are launching an instance
+When there is a rapid access of data then we select provisioned IOPS
+
+In general purpose we have 2 types; 1. GP2, 2. GP3
+GP2 - Min of 100 IOPS/minute, Max of 16000 IOPS/minute
+GP3 - Min of 3000 IOPS/minute, Max of 16000 IOPS/minute
+
+Provisioned IOPS is of 3 types; 1. io1, 2. io2, 3. io2 block express (supported by R5B instance type)
+io1 - Min of 100 IOPS/minute, Max of 64000 IOPS/minute
+io2 - Min of 3000 IOPS/minute, Max of 64000 IOPS/minute
+io2 block express - >= 64000 IOPS
+
+Note: io1 and io2 are only available for Nitro based instances. For XEN, Max of 32000 IOPS/minute
+
+1. Protecting the EBS volumes against the deletion when we are terminating the instance
+2. How to attach a new EBS volume to an existing VM
+3. How to detach an EBS volume from an existing VM
+4. How to delete an EBS Volume
+5. How to increase EBS volume size which is already attached to the VM
+6. EBS Multi-attach
+	1. Create 3 instances
+	2. Create 1 EBS Volume
+	3. Attach the same volume to multiple VMs
+
+Snapshot - The backup of EBS volume is called as snapshot
+Snapshots are taken as incremental
+
+EBS --- 10 GB data --- Complete backup
+1 GB extra ---- incremental backup
+2 GB extra ---- incremental backup
+EBS Volume Size = 100 GB
+
+A snapshot takes a copy of EBS volume and it is stored redundantly in multiple AZs
+
+
+EC2 Placement Groups
+Placement groups are logical grouping of instance in the selected AWS region
+Placement group strategies;
+1. Cluster - group all instances to low latency group in single AZ
+2. Spread - it places a small group f instances across distinct underlying hardware
+3. Partition - It spreads instances across many different partitions within AZ
+
+
+
+
+
+
+
+
+
+
+
+
+
