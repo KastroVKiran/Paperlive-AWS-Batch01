@@ -1,0 +1,11 @@
+													Day 07_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. Connecting to VM using Sessions Manager
+2. Launching a VM with user data
+3. How to automate the start and stop of VM
+4. Autoscaling
+5. Load Balancer 
+6. Enable sticky session with ALB
+7. Launch Template
+8. Monitor CPU Utilization using Cloud Watch
