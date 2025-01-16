@@ -1,0 +1,65 @@
+													Day 08_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. How to automate the start and stop of VM
+2. Enable sticky session with ALB
+3. Monitor CPU Utilization using Cloud Watch
+4. Demos
+5. How to create the AWS Budgets
+6. Working with AWS CLI
+
+Demo: LT + LB + ASG + Scaling Policies
+
+1. Create LT
+2. Modify LT with Userdata
+3. Launch Instance using Modified LT version
+4. Access the App
+5. Terminate the instance
+6. Create ASG using Modified LT version
+7. Check for instances
+8. Access the app using Public IPs of all the instances
+9. Access the app using DNS Name of LB
+10. Create Scaleout and Scalein Policy
+11. Create Cloud Watch Alarms
+12. Observe the changes
+
+
+LB ---- 3 instances
+
+Userdata
+==========
+#!/bin/bash
+yum update -y
+yum install -y httpd
+systemctl start httpd
+systemctl enable httpd
+usermod -a -G apache ec2-user
+chown -R ec2-user:apache /var/www
+chmod 2775 /var/www
+echo "Hi Kastro from $(hostname)" > /var/www/html/index.html
+
+1. How to automate the start and stop of VM
+Steps;
+1.1. IAM Role with SSM Permission
+1.2. EC2 Instance
+1.3. CloudWatch
+
+
+6. Working with AWS CLI
+Command Line Interface
+
+
+Link to download the CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+
+
+
+
+
+
+
+
+
+
+
+
