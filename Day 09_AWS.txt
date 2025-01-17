@@ -1,0 +1,279 @@
+													Day 09_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. RDS
+2. Wordpress Site
+3. EFS
+4. Cloud Trial
+
+--------------
+1. RDS
+--------------
+RDS - Relational Database Service
+Using RDS Service we will launch the Databases (Instances)
+3 Tier Architecture - Web Layer (Front End - html, css, js..), App Layer (Bussiness Logic - store the source code of the App - java, python, .net...), DB Layer (SQL, NoSQL, PostgreSQL...)
+RDS Instances are highly costly
+
+Data? - Data is a collection of values or info (Ex: Sachin, Dhoni, Ponting, Fleming)
+Database? - DB is an organized collection of data (Ex: India - Sachin, Dhoni, Australia - Ponting, NewZeleand - Fleming)
+Types of data? - 3 types of data - Structured, Semi Structured, Unstructured 
+
+Structured Data? 
+Typically stored in tables with pre-defined structures which is also known as Schema
+Banking App ---- S.No Name Account No. Branch Name IFSC Code
+Suitable for OLTP (transactional) and OLAP (Analytical) workloads
+Suitable for complex queries and analytics
+
+Unstructured Data?
+It has unorganized data. No defined schema
+Commonly used in Non-relational databases, filesystems
+
+Semi structured Data?
+Organized data but not constrained by a fixed schema
+Mostly available either in JSON format or XML format
+Commonly used in Non-relational databases
+Suitable for big data and low latency applications
+
+Relational databases - AWS Services - RDS & Aurora for OLTP, RedShift for OLAP
+Relational databases are written to and queried using SQL (Structured Query Language)
+
+Non-relational databases - sometimes called NoSQL (Not Only SQL)
+Suitable for semi-structured and unstructured data
+Suitable for big data applications
+Not suitable for OLAP Application
+
+---------------------------------------------------------------------
+2. Building and Deploying a Word Press Website
+---------------------------------------------------------------------
+Services Used:
+	EC2 (Frontend), RDS (Backend), Using default VPC
+
+Step 1.
+Lets create the DB for the DB Deployment ----> Databases (left pane) ----> Create DB ----> Standard Create, MySQL, Edition: MySQL Community, Engine Version: MySQL8.0.35, Templates: Free Tier, DB Instance Identifier: database-1, Master Username: admin, Credentials Management: Self Managed, Master Password: <Type Password> (Here i will keep password as kastro2025) and Retype to Confirm, Instance Configuration: Turn off the toggle bars for 'Show instance classes....' and 'Include previous gen classes', db.t4g.micro, Storage type: gp2, Storage: 20, Storage Autoscaling: 'Uncheck' enable autoscaling, Connectivity: Compute Resource: Dont Connect to EC2 Compute Resource, Network Type: IPv4, VPC: default-vpc, DB Subnet Group: Default, Public Access: No, VPC SG: Create new: New SG Name: wordpress-SG, AZ: No preference, Additional Configuration: 3306, Database Authentication: Password Authentication, Monitoring: 'Uncheck' Turn on performance insights ----> Additional configuration: Initial DB Name: <LeaveItBlank>, DB Parameter Group: default.mysql8.0, Option group: default.mysql8.0, Backup: 'Uncheck' Enable automatic backup (But in real-time it is highly recommended to have DB backup. Here to avoid charges im not checking), Maintenance: 'Uncheck' Enable Auto minor version upgrade ----> Create DB (You will see 1 db got created). Wait for sometime till it gets created.
+
+While creating the DB instance, we have selected to create a new SG. that new SG will have the port number 3306 which is the default port number for MySQL.
+
+Step 1.1.
+To verify; goto SG (Left pane) ----> Open "wordpress-SG" ----> Check the port 3306 in the inbound rules. But check the source (you will see an IP, which is the currently connected network)
+We will modify this SG in sometime
+
+Step 2.
+Launch Amazon Linux 2 AMI, Select the existing keypair, t2.micro, create new security group (open HTTP traffic) SG Name: wp-web-server-sg.
+In this instance we will install LAMP (Linux, Apache, MySQL, PHP) stack
+
+Goto the Step 1.1. ----> Open SG of RDS instance i.e (wordpress-SG) ----> Edit inbound rules ----> Add rules ----> Type: MySQL/Aurora, TCP, 3306, sg: select 'wp-web-server-sg'
+(OR)
+Copy the private IP of EC2 instance created ----> Open SG of RDS instance i.e (wordpress-SG) ----> Edit inbound rules ----> Add rules ----> Type: MySQL/Aurora, TCP, 3306, Source: Anywhere IPv4: "Private IP of VM"
+
+If this adjustment is not done, we cannot connect to the database in RDS instance
+
+Step 2.1. Installation of MySQL Client and Creation of Database
+Connect to the VM ----> sudo su ----> sudo yum install -y mysql (The reason for installing mysql client is, whatever the RDS we have created we have to connect to it and prepare a database for wordpress website and then we will create an user and we will give permissions for that user to access the 'wordpress' database. We can also use the admin user here, but admin user will have all previlages, so its not recommended to use at application level)
+
+Export mysql endpoint.
+--> export MYSQL_HOST=<RDS-EndPoint>
+
+Connect to mysql to create a db user
+
+mysql -h <RDS-EndPoint> -P 3306 -u admin -p
+(In the above -h is hostname, -P is port number, -u is the Username, -p is password)
+Enter the password you have created while creating the RDS i.e kastro@2025
+
+CREATE DATABASE wordpress;
+(In the above the database name we are creating is 'wordpress'
+
+CREATE USER 'kastro' IDENTIFIED BY 'kastro@2025';
+
+GRANT ALL PRIVILEGES ON wordpress.* TO kastro;
+In the above, for the user called 'kastro' i'm telling to provide all the permission for the database which we have created i.e. 'wordpress'
+
+FLUSH PRIVILEGES;
+Since we have modified the permissions, it is recommended to flush the privileges.
+
+Exit
+
+Step 2.2. Installation of Apache
+
+sudo yum install -y httpd
+sudo service httpd start
+chkconfig httpd on (To make it as a logon service)
+
+To check whether apache has been installed or not ----> Paste the public ip of VM in new tab ----> You should see Apache test page
+
+Download and unzip the wordpress template
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+
+$ ls
+You will see below files i.e zipped file and unzipped file
+latest.tar.gz 
+wordpress
+
+cd wordpress
+ 
+create a wp-config file from sample file already provided
+
+cp wp-config-sample.php wp-config.php
+(Renamed the file "wp-config-sample.php" as "wp-config.php")
+
+edit the wp-config.php file to point to database
+--> vim wp-config.php ---> You will see below content. Modify it accordingly;
+
+// ** MySQL settings - You can get this info from your web host ** //
+
+/** The name of the database for WordPress */
+define('DB_NAME', 'database_name_here');
+
+/** MySQL database username */
+define('DB_USER', 'username_here');
+
+/** MySQL database password */
+define('DB_PASSWORD', 'password_here');
+
+/** MySQL hostname */
+define('DB_HOST', 'rds-endpoint-name');
+
+In the above the 'database_name_here' is 'wordpress'
+'username_here' is 'kastro' which is the wordpress user created 
+'password_here' is kastro2025
+'rds-endpoint-name' is provide the end point of RDS instance
+
+after editing the above, Scroll down in the same page till you find the link as shown below;
+Copy and paste the link in browser;
+Now go to this link and it provides some information to update the same file. It looks like below shared one.
+
+Change these to different unique phrases! You can generate these using the {@link https://api.wordpress.org/secret-key/1.1/salt/ WordPress.org secret-key service}.
+Paste the above link in browser as shown below (dont paste the complete link)
+https://api.wordpress.org/secret-key/1.1/salt/
+
+You will see the information, copy it and paste in the above file opened using vim in the place of the text you will see something similar as below;
+define('AUTH_KEY',         '$kA;Zae|`+u9D NUCnL@=C7I,}BAR`-H4d5G[~O+8h3NY1J6;|>a-rnW48 `%Mi6');
+define('SECURE_AUTH_KEY',  '4)[&^O YRN^xy@R: xLva6b,gQ&oFc5bY70L3q=+pT=GY:EQ,0Vqia}R}EzR:&||');
+define('LOGGED_IN_KEY',    '$zF/n8`hJd^D+ZN05p>7p5oo6Nd|5s7$O5T2If~x~Y{WlQ-Rv#5YbO>^gtb)AVjO');
+define('NONCE_KEY',        'ZeGfFsjH-3gzlO%g)8H |bK%g S8Q!9Q1rsDhEL*n3UU&]hq7uO)=leU6;Cvj7[(');
+define('AUTH_SALT',        '}-zvaE<XDx%wB/z!M]QdMPpgOzN9:YzZx_,C{8~nne9xhGX60dZwKjh-i=|h&C86');
+define('SECURE_AUTH_SALT', 'YuUNLM0fhD,;<nr$J/.FeJ+d[[nEt!UWw2|8l9wS)SECG42@^Mjd<Ua~bZK?O)[/');
+define('LOGGED_IN_SALT',   'R883&$l-.?%`eJn/9`dh{|NKh-_OcF}+4a^KM<(Wbi<|]4C+Sc#+*4QW~=ty:JkC');
+define('NONCE_SALT',       'RLKs$-ry b/!|N>73,T*wyKX5ILu;@nTaA?PMNip0L5|u^l*r>*g1y-wK/;oe2nl');
+
+---> esc ----> : wq
+
+The above files are in php format. So lets install php in the VM
+sudo amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2 
+
+cd /home/ec2-user
+ls ----> You will see the zip file and wordpress directory
+
+sudo cp -r wordpress/* /var/www/html/
+
+cd /var/www/html
+
+sudo service httpd restart
+
+Get your instance public IP and Paster it in browser, It should give you wordpress initial configuration page.
+
+Fill the details in the wordpress configuration page ---> 'Check' discourage search engines from indexing this site. ---> After clicking on 'install wordpress' you will see the success message ---> If you see any error, it because of either php installation or the connectivity to the database -----> Click on 'login' ----> Give the login and password for wordpress ---> You will be in the admin dashboard of wordpress template
+
+Copy the IP of VM and paste in new tab. You will see the wordpress blog. To edit the blog, go to the admin dashboard and change the things accordingly. Lets say i want to change the theme; Appearances (left pane) ---> Select themes
+
+----------------
+3. EFS
+----------------
+EFS - Elastic File System 
+This belongs to File Level Storage
+EFS is region specific service
+Linux OS - EFS
+Windows OS - FSx (Not preferred)
+
+EBS Volume - Multiple VMs
+VM - Root Volume - EBS Volumes
+3 VMs - 1 root vol attached fro all the 3 and 1 EBS vol for all the 3 VMs
+VM1 - Root Vol - Kastro.txt
+VM2 - Root Vol -
+VM3 - Root Vol -
+We cannot share the data to multiple root volumes
+If i want to attach a common/shared storage to all the VMs, we will use EFS
+EFS is completely managed by AWS. As an user, we only need to mount the EFS to the required VMs
+Whenever we attach an EFS volume to VM, we need to mount it
+VM1
+VM2	EFS
+VM3
+
+
+Netflix.java - share to 100 people
+NFS - Network File System
+
+AWS - EFS
+EFS works with NFSv4 protocol
+EF can be mounted to multiple VMs at the same time across different AZs
+EFS supports unlimited storage
+
+1 TB of data ---- S3 - days
+	Company - on-premise - 10 TB ---- Snow Family
+In Snow Family, we have 3 devices;
+Snow Cone ----> supports 8 TB of data
+Snow Edge ----> supports 100 TB of data
+Snow Mobile ----> supports PB of data
+
+All the above are physical devices and highly secure
+Snow family is used to transfer huge data from on-premises to AWS cloud and Vice-versa
+
+Launch 2 VMs with same SG and in different AZs. For SG, open NFS Rule
+Connect to VM1
+sudo su
+yum install nfs-utils
+mkdir efs
+Mount EFS - mount -t nfs4 <DNS of EFS>:/ efs/
+cd efs
+touch file1.txt file2.txt
+mkdir test
+
+Connect to VM2
+sudo su
+yum install nfs-utils
+mkdir efs
+Mount EFS - mount -t nfs4 <DNS of EFS>:/ efs/
+cd efs
+ls
+You will see the file1.txt  and file2.txt files and also you will see 'test' directory
+
+-----------------------
+4. Cloud Trial
+-----------------------
+CLI, SDK, Console, Programmatic, APIs - Cloud Trial
+Cloud Trial is a activity monitoring service
+By default CT will be enabled for all AWS accounts
+No cost
+Be default, only 90 days of log info will be stored in event history in CT
+Default logs created by CT are known as 'Event History'
+Types of events;
+1. Management events - launch VM, Created S3 bucket, IAM User, VPC network...
+2. Data events - uploaded an object, downloaded
+Currently 'data event' is supported to S3, Lambda, Dynamo DB
+Management event is available for all AWS services
+Custom trial can be created in 1 region or in multiple regions
+CT is region specific
+All the activities related to Global services will be available in N.Virginia region
+To store the logs of CT, we can integrate CT with S3 or CW Logs
+Atleast 10-15 delay will be there in getting the logs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
