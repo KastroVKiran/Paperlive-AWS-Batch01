@@ -1,0 +1,83 @@
+													Day 10_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Modules Completed so far (20-01-2025)
+Module 1 - Introduction to the Course
+Module 2 - Introduction to Cloud Computing
+Module 3 - EC2 (Compute Layer)
+Module 4 - S3 (Storage Layer)
+Module 5 - RDS (Database Layer)
+Module 9 - LB, ASG, Wordpress Site (Implementing Elasticity and HA)
+Module 13 - Cloud Trial, Billing-Cost reports, Secrete Manager
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+Module 6 - IAM
+MFA
+Creation of IAM User
+Attaching AWS Managed Policies
+Access the IAM Account
+Generation of Access and Secret Access Keys for the created IAM User
+Customer Managed Policies
+IAM Roles
+IAM Groups
+Module 11 - SNS
+
+IAM - Identity and Access Management
+
+AWS Account Types;
+1. Root Account		- which has all kinds of permissions
+2. IAM User Account	- which has limited permissions
+
+Who will create IAM Account?
+The Root User will create the IAM Account
+
+What is the need to create IAM Account?
+Company - DevOps Team - 10 members - 10 AWS Accounts? - No.
+AWS Account (Root) - all privileges 
+1 or 2 root accounts - DevOps Team
+By using root accounts, we will create IAM User Accounts with only required permissions
+Fresher 1 - EC2 Instances - Permissions
+Root User - IAM User (ID and Password) - Limited permissions
+
+IAM is completely FREE
+IAM Account - EC2 (Bills)
+
+1. Authentication - login AWS Account (Email & Password)
+2. Authorization - access to services in AWS
+
+IAM is a global service
+S3 is also a global service
+
+EC2, RDS is a region specific services
+
+Features of IAM Service;
+1. IAM User - Create the user
+2. IAM Policy - Create the permissions
+3. IAM Role - Temporary credentials
+4. IAM Group - To simplify the access management
+
+Policies in IAM;
+1. AWS Managed Policy - standard policies created by aws to access different services
+2. Customer Managed Policy - created by customer
+
+All the IAM Policies follows JSON (Java Script Object Notation) Format
+
+
+
+To work with MFA, install Google Authenticator in your mobile
+MFA provides an additional layer of security to the AWS Account
+
+
+Types of IAM Roles;
+1. Service based role
+2. Account based role 
+
+IAM Groups
+----------------
+
+SNS - Simple Notification Service
+To get notifications to the email about the activity performing in the AWs account we will use SNS Service 
+SNS is a region specific service
+SNS is FREE
+
+
+
