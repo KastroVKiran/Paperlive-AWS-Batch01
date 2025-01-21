@@ -1,0 +1,121 @@
+													Day 11_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. VPC Concepts
+2. Creation of Custom Network and its associated components
+
+VPC - Virtual Private Cloud
+VPC is a region specific service
+Whenever we want to launch an EC2 instance, all the instances should be launched in a network. That network is called as VPC.
+
+IP Addressing
+-----------------------
+To connect from one device to another device on internet we need IP address.
+IP - Internet Protocol.
+For every app/website consists of IP address.
+
+Types of IPs;
+1. IPv4 - 4 parts/octets - 32 bit - Numbers
+2. IPv6 - 6 parts/octets - 128 bits - Alphanumeric characters
+Each octet consists of 8 bits
+IPv4 ---- 4 x 8 = 32 bits
+
+128.32.61.0
+
+CIDR - Classless Inter Domain Range
+If we want to allocate private IP, we call it as CIDR
+It is a method for allocating IP address
+CIDR is used in Security Groups & AWS Networking (VPC)
+Webiste: cidr.xyz
+
+CIDR consists of two components;
+1. Base IP - represents an IP contained within the range
+2. Subnet mask - defines how many bits can change in the IP
+Subnet mask decides how many we are going to get
+
+123.45.67.88/32
+123.45.67.88/30
+123.45.67.88/24
+123.45.67.88/0
+
+2^32-n
+
+Ex; 
+123.45.67.88/32	----> 2^32-n = 2^32-32 = 2^0 = 1 IP
+123.45.67.88/30	----> 2^32-n = 2^32-30 = 2^2 = 4 IPs
+123.45.67.88/24	----> 2^32-n = 2^32-24 = 2^8 = 
+123.45.67.88/0	----> 2^32-n = 2^32-0 = 2^32 = All traffic
+
+0.0.0.0 to 255.255.255.255 - Allow all IPs
+
+Subnet
+---------------
+Subnet is logical partitioning of a network into smaller IP ranges
+A subnet is a subrange of IPv4 addresses in VPC
+AWS reserves 5 IP addresses in each subnet (first 4 and last one)
+These 5 IP addresses are not available for use and cannot be assigned an EC instance
+
+Ex: 10.0.0.0/24 ---- 256 IPs
+10.0.0.0 - Network address
+10.0.0.1 - Reserved by AWS for VPC Router
+10.0.0.2 - Reserved by AWS for mapping to amazon provided DNS
+10.0.0.3 - Reserved by AWs for future use
+10.0.0.255 - Network broadcast address
+
+By default in AWS, for every region we will have default VPC
+The number of default subnets in a region is dependent on AZs
+1 AZ can have multiple subnets
+5 VPCs/region
+
+
+/16 or /24
+
+Ex: If you need 29 IPs for your network;
+/27 --- 32 IPs = 2^32-27 = 2^5 = 32 IPs - 5 IPs = 27 < 29
+/26 --- 64 IPs = 2^32-64 
+
+VPC Terminology
+---------------------------
+Subnets - Public Subnet - Exposed to internet
+Subnets - Private Subnet - Not exposed to internet
+
+IGW - Internet Gateway - All the public subnet traffic is routed to IGW
+If you want to have the internet connection to the private subnet within the VPC (network), we will use NAT Gateway
+NAT - Network Address Translator
+The only duty of NAT is to give internet access to private subnet
+
+Database - Private Subnet
+
+Route Tables - Public RT - All traffic is route through IGW. Public subnets are associated with Public RT
+Route Tables - Private RT - Private RT traffic is routed through NATGW. Private subnets are associated with Private RT
+
+
+Note: Whenever we are launching an EC2 instance in a public subnet, that instance is called as BASTION HOST/BASTION SERVER/JUMP SERVER
+
+VPC END POINTS - To connect to only AWS services by using custom network
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
