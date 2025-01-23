@@ -1,0 +1,34 @@
+													Day 12_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. VPC Peering
+2. VPC Flow logs
+
+VPC Peering is nothing but, 
+
+VPC 1 ----- VPC 2
+Peering connection is established b/w two or more VPCs in the same region or different region or different account
+When we want to connect one VPC with another VPC privately, then we will use Peering concept
+
+VPC Peering can be made in 3 ways;
+1. Peering can be done in the VPCs available same region
+2. Peering can be done in the VPCs available in different regions
+3. Peering can be done b/w the VPCs available in different accounts
+
+2. VPC Flow logs
+Additional cost
+To know who is accessing the network then we will use VPC Flow logs
+Flow logs can be enabled in 3 levels;
+	1. VPC level		2. Subnet level		3.ENIs (Elastic Network Interface)
+All the logs will be analyzed using an AWS Service known as Guard Duty. If we just enable Guard Duty and send the VPC Flowlogs to it, it will do the analysis and thus it helps us to take necessary action.
+Flowlogs can capture ACCEPTED, REJECTED, ALL
+All logs can be published either in S3 Bucket or CloudWatchLogs
+To hare the logs to 3rd party services (Splunk, Sumologic) we will use AWS Kinesis Firehouse
+What kind of information will we be getting through Flowlogs;
+sourceIP, Destination IP, Packet Size, Source Port, Destination Port, Call is accepted/rejected
+Flow logs will come every 1 minute or every 10 min
+Be default we will get flowlogs for every 10 minutes
+
+
+
+
