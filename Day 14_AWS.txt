@@ -1,0 +1,70 @@
+													Day 14_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Pending Topics;
+1. Cloud Front
+2. AWS Lambda
+3. ECR & ECS --------------------------------------> DevOps -----> DOCKER (Dockerfile, Images, Containers, DockerHub, Docker Daemon)
+4. File Gateway & Storage Gateway
+5. AWS Config and Secrets Manager
+
+2 hrs length video about ECR & ECS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. Client Server Architecture
+2. Environments
+3. AWS Project - Do it yourself (Documentation, Video resource) 2.30.00 video
+Submission deadline for the project: 29-01-2025
+
+How to submit the project?
+Once after you have deployed the application ----> HOME Page & DB Page ----> Home Page - Screenshot, DB Page - Data - First Name and Last Name - Screenshot ----- 2 screenshots - Email
+
+Submit the Project to "kastrokiran@gmail.com"
+Name:
+Batch:
+Timing:
+
+Repo URL: https://github.com/KastroVKiran/3TierArchitectureApp.git
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://youtu.be/Oj-Hr_aulKA
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

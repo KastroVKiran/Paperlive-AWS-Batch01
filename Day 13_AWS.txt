@@ -1,0 +1,128 @@
+													Day 13_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. NACL Vs SG
+2. Route 53
+
+NACL - Network Access Control List
+NACL will work at Instance level, Subnet level
+Security Groups works at security level i.e Resource level
+For every network, NACL and SG acts as basic firewalls
+Since NACL is going to work at subnet level, whatever resources that are launched in the subnet level, for all those resources NACL applies automatically.
+NACL are stateless in nature.
+SG are statefull in nature
+
+Inbound traffic - is where the request goes from user to the server
+Outbound traffic - is where the response from server to user
+
+In NACL and SG both inbound rules and outbound rules should be there
+
+For one EC2 instance, we can attach 5 different SGs
+In each SG, we can have a maximum of 60 rules
+
+For 1 subnet, we can attach only 1 NACL
+
+In SG, we can create only "Allow" rules
+In NACL, we can create both "Allow" and "Deny" rules
+
+EC2 instance ---- SG ---- Security layer ---- An additional layer of security is NACL
+
+
+
+Request --- EC2 instance
+Request --- NACL --- Subnets --- SG
+
+If the request makes it through the i/b rules of SG and makes it to the VM, the VM will then reply with whatever there is to do with the app. And then the o/b rule is automatically going to be accepted at SG level. It is because stateful ness of SG\
+This means whatever is accepted to go inside they can also go out
+
+But in NACL, since it is stateless, NACL o/b rules are going to be evaluated and if they are not passing then the request will not make it through
+
+
+----------------
+ROUTE 53
+----------------
+Route 53 is DNS service in AWS
+DNS - Domain Name System
+53 is the DNS port number
+In Route 53 we will create records
+	LB ---- DNS URL ----- Lengthy URL ----- We can customize the lengthy URL or IP address in a shortest way possible
+Lets say we have a browser. Any browser requires 2 things, 1) Hostname 2) IP address
+
+From the browser the request will go to local DNS. From local DNS the request will go to RNS (Root Name Server). From RNS the request goes to TLD (Top Level Domain). From TLD the request goes to Name Server. From Name Server the request goes to SOA
+
+DNS  keeps all the host names and IP addresses. DNS also convert host name to IP address and IP address to host name
+
+To know the IP address of any website we will use "nslookup" command
+
+In route 53 we need to configure only Name Server and SOA. Route 53 will take care of Local DNS, RNS, TLD internally
+Route 53 is a global service
+
+Route 53 features;
+1. Domain registration --- we can purchase domain using Route 53
+2. DNS routing
+3. Health checks
+4. Routing policies
+
+DNS is all about records
+In Route 53 the very first thing we have to do is to create a Hosted Zone. This Hosted Zone contains Records. Hosted Zone is a container of records.
+The name of the hosted zone that we should create is the Domain Name
+Hosted Zone and Domain Name (.com, .edu, .in...) are same
+
+Types of Hosted Zones;
+1. Public HZ - websites will be available on internet - generally preferred
+2. Private HZ - if you want to access WEBSITE within the network (VPC), we will use Private HZ
+
+Hosted Zone contains records
+	Ex: www.kastro.com ---- lengthy URL of LB i.e DNS URL ---- from ELB the request will be forwarded to EC2 instance. Inside VMs we have our app
+
+Browser --- Kastro.com --- Route 53 --- Hosted Zone --- Records --- ELB URL ---- VMs
+
+Whenever we create a public hosted zone, 2 records will be created automatically;
+	1. Name Space Record - it is a pool of servers
+	2. SOA Record - Admin for Hosted Zone. It has IP address
+
+NS and SOA records shouldn't be deleted.
+
+Route 53 Record types;
+1. A Record
+2. AAAA Record
+3. CNAME Record
+4. Alias Record
+5. MX Record
+
+Most commonly used record is a combination of A record and Alias Record
+C Name Records are billable, Alias records are free
+Always chose Alias Record over CNAME record
+
+Reference Link: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
+
+Routing Policies;
+Kastro.com --- Route 53 --- Hosted Zone ---- LB DNS URL --- VMs
+1. Simple Routing Policy --- no health checks
+2. Failover Routing Policy --- health checks
+3. Geolocation Routing Policy --- R53 identifies users/requests location automatically and divert the traffic to the correct record
+4. Latency Based Routing Policy ---request get connected based on the latency
+5. Multi Value Routing Policy --- similar to Simple Route Policy but MVRP will perform health checks
+
+Reference Link: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
