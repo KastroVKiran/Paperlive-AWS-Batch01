@@ -1,4 +1,4 @@
-# Welcome!   
+# Welcome! AWS Classnotes for Paperlive Batch  
 
 Hi there! 👋  
 I'm **Kastro Kiran**, your AWS Trainer.  
@@ -37,6 +37,12 @@ Here’s what we’ll explore together:
 - **ECS (Elastic Container Service)**  
 - **Secrets Manager**  
 - And a few other services!  
+
+---
+
+## 🛠️ Featured Project  
+**AWS 3-Tier Architecture Project**  
+Watch the step-by-step tutorial here: [YouTube Link](https://youtu.be/Oj-Hr_aulKA)  
 
 ---
 
