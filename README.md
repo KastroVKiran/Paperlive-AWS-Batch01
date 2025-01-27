@@ -1,4 +1,4 @@
-# Welcome! AWS Classnotes for Paperlive Batch  
+# Welcome!  
 
 Hi there! 👋  
 I'm **Kastro Kiran**, your AWS Trainer.  
