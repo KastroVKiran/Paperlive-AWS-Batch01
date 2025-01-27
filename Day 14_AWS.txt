@@ -25,28 +25,7 @@ Timing:
 
 Repo URL: https://github.com/KastroVKiran/3TierArchitectureApp.git
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://youtu.be/Oj-Hr_aulKA
+Project Video: https://youtu.be/Oj-Hr_aulKA
 
 
 
