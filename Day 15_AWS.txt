@@ -1,0 +1,122 @@
+													Day 15_AWS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Topics:
+1. AWS Lambda
+2. Automate start and stop of EC2 instances using lambda
+3. Dynamo DB
+4. Lambda + Dynamo DB + API Gateway Project
+5. AWS Config
+
+EC2 --- Instances ---- Host our App
+RDS --- RDS Instance --- Host our App DB
+
+To deliver any application we need a server (VM). For that sever we need to configure hardware components, AMI, OS, Storage, Keypair...
+Without the need of any configurations and the servers, in AWS we have some services which are known as SERVERLESS SERVICES
+
+SERVERLESS SERVICES;
+AWS Lambda, Dynamo DB, API Gateway...
+In the above services AWS will manage the servers in the datacenters
+
+In Lambda, there wont be any charges if the app code is not running. But in EC2 when we launch the instance, it doesn't matter whether the app is running or not AWS will charge
+Lambda - Lambda Functions - Host our code
+Lambda supports - Python, Java, .net, Node JS, Go, Ruby
+C++ ----> request to AWS ---> Confirmation ----> Host the app ----> Additional charges
+
+In Lambda we will create Lambda Functions
+
+AWS lambda is a region specific service
+
+----------------------------------------------------------------------------------------------------------------------------------
+How to start and stop of EC2 instances using lambda 
+----------------------------------------------------------------------------------------------------------------------------------
+Launch VM (any configuration)
+
+Step1 
+=====
+IAM ----> Policies ----> Create policy ----> Click on 'JSON' ----> Paste the below policy ---->
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents"
+      ],
+      "Resource": "arn:aws:logs:*:*:*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:Start*",
+        "ec2:Stop*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+
+----> Next ----> name: Lambda-Role ----> Create Policy
+
+IAM ----> Role ---> Create role ----> 'Check' AWS Service, Use case: Lambda ----> Next ----> Select the policy created above ----> Role Name: demo-Lambda-Role, ----> Create role
+
+Step2 
+=====
+Lets create Lambda function
+AWS Lambda ----> Create function ----> Author from scratch ----> Function Name: Stop Instance, Runtime: Python 3.9 ----> Change default execution role: 'Check' Use an existing role: Select the role created (demo-Lambda-role) ----> Create function	
+Open the function created ----> 'Code' tab ----> Paste the below code ---->
+import boto3
+region = '<ProvideRegionCodeWhereInstancesAreAvailable>'
+instances = ['<ProvideInstance1ID>', '<ProvideInstance2ID>']
+
+ec2 = boto3.client('ec2', region_name=region)
+
+def lambda_handler(event, context):
+    ec2.stop_instances(InstanceIds=instances)
+    print('stopped your instances: ' + str(instances))
+
+----> Click on 'Deploy' ----> To know the configuration ----> Goto 'Configuration' tab ----> 'permissions' (left pane) ----> You can see the details.
+
+The function is ready. Lets create a trigger ----> Trigger Configuration: Select 'EventBridge' ----> Rule: 'Check' Create new rule, Name: Stop Rule, Description: Stop VMs, Rule type: 'Check' Schedule expression  ----> Write the cron expression to stop the VMs everyday at 10.00 PM and paste the cron expression ----> Add ----> Goto EC2 and check VM. It will be stopped
+
+
+AWS Config & Security Hub
+---------------------------------------
+In AWS we have many security services, which doesn't require any additional configuration. Here we just have to activate these security services, automatically AWS will take care of the security
+Some security services: Config, Guard Duty, Inspector, Security Hub
+
+The above services are charged based on monthly basis
+
+By using the above services, we will get to know what is happening in the AWS account
+
+Own Account ----> 5 accounts are created by using AWS Organizations service
+
+Once after enabling AWS Config it will atleast 24 hrs to get the details
+
+AWS Config is a region specific service
+
+
+3. Dynamo DB
+---------------------------
+DB - Database
+
+4. Lambda + Dynamo DB + API Gateway Project
+----------------------------------------------------------------
+
+Dynamo DB - acts as a database
+Lambda - acts as a webserver
+API gateway - acts as a frontend of the app
+
+User ----> App ----> API Gateway ----> Lambda ----> Dynamo DB
+
+Steps;
+IAM Role, Policies
+Lambda Function
+Code - zip file format
+Dynamo DB table
+API Gateway
+Access the app (invoke URL)
+
+
+
