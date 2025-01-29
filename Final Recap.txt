@@ -1,0 +1,59 @@
+Final Recap
+
+AWS
+---------------
+1. Introduction to Cloud Computing
+2. Cloud based models - service based model (IaaS, PaaS, SaaS), Public, Private, Hybrid
+3. AWS Global Infrastructure (Regions and AZs)
+4. AWS Certifications (Cloud Practitioner, Solution Architect)
+5. Simple Storage Service (Buckets, Upload/Download/Delete, ACLs, Block all public access, Bucket Policies, Static Website Hosting, Versioning, Security, Storage Classes, Life Cycle Management...)
+6. Elastic Compute Cloud (VMs, AMI, OS, EBS, Load Balancing, ELB, ALB, GLB, CLB, Autoscaling, Launch Templates, Snapshots, Security Groups)
+7. Relational Database Service (Database, Types, Launch a DB, Billing)
+8. Identity and Access Management (Role, Group, Policies - User managed policies, AWS managed policies)
+9. Virtual Private Cloud (Custom VPC, Default VPC, Subnets, IGW, NATGW, RT, NACL, SG, VPC Flow logs, Bastion Host, VPC Peering)
+10. Route 53
+11. Simple Notification Service
+12. Lambda
+13. Cloud Watch, Cloud Trial, Cloud Front, Host Wordpress Website
+14. AWS Config, AWS Datasync, EFS, AWS CLI, Billing
+15. ECR, ECS
+16. Client Server Architecture
+17. 1 Tier, 2 Tier, 3 Tier
+18. Environments
+19. 3 Tier Architecture Project
+
+DevOps
+--------------------
+1. Linux & Shell Scripting
+2. Python Basics
+3. Git & GitHub - Repository tool
+4. Maven - Build (2 Projects)
+5. Tomcat - Webserver (1 Project)
+6. Jenkins - CI & CD Tool (2 Projects)
+7. Docker - Containerization Tool (4 Projects)
+8. Ansible - Configuration (Orchestration) Management  Tool (1 Project)
+9. Terraform - Infrastructure Tool (1 Project)
+10. Kubernetes - Orchestration Tool (1 Project)
+11. Prometheus & Grafana - Monitoring Tools 
+
+3 Real-time projects (Swiggy App, Zomato App, Creation of EKS Cluster using Terraform and Jenkins, Microservice App)
+
+
+Swiggy App: https://github.com/KastroVKiran/DevOps-Project-Swiggy.git
+Zomato App: https://github.com/KastroVKiran/DevOps-Project-Zomato-Kastro.git
+EKS Project: https://github.com/KastroVKiran/Jenkins-Terraform-EKS.git
+
+Docker Playlist: https://github.com/KastroVKiran/Docker-by-Kastro.git
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		Post your honest feedback about the course and the projects on LinkedIn. Make sure to tag me on LinkedIn
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
